@@ -1,50 +1,96 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import 'tailwindcss/tailwind.css'
 import { FiGithub } from 'react-icons/fi';
 import { AiOutlineLinkedin } from 'react-icons/ai';
 import { Disclosure } from '@headlessui/react';
+import { FaTimes } from 'react-icons/fa';
+import { FcMenu } from 'react-icons/fc';
+
+const navigation = [
+	{ name: "Work", href: "#", current: true },
+	{ name: "Resume", href: "#", current: false },
+	{ name: "Contact", href: "#", current: false },
+]
+
+function classNames(...classes) {
+	return classes.filter(Boolean).join(' ')
+}
 
 export default function Home() {
 	return (
-		<Disclosure as="nav" className="bg-gray-800">
-			{({ open }) => (
-				<div className={styles.container}>
-					<Head>
-						<title>Dennis Resume</title>
-						<meta name="description" content="Use to showcase my skills" />
-						<link rel="icon" href="/favicon.ico" />
-					</Head>
-					<nav className="flex items-center justify-between flex-wrap bg-white p-6">
-						<div className="item-center font-black"><span>DN</span></div>
-						<div className="block lg:hidden">
-							<Disclosure.Button className="flex items-center px-3 py-2 border rounded border-teal-400  hover:text-white hover:border-white">
-								<svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
-							</Disclosure.Button>
+		<>
+			<Disclosure as="nav" className="bg-gray-800">
+				{({ open }) => (
+					<>
+						<div className={styles.container}>
+							<Head>
+								<title>Dennis Resume</title>
+								<meta name="description" content="Use to showcase my skills" />
+								<link rel="icon" href="/favicon.ico" />
+							</Head>
+							<nav className="flex items-center justify-between flex-wrap bg-white p-3">
+								<div className="item-center font-black"><span>DN</span></div>
+								<div className="block lg:hidden">
+									<Disclosure.Button className="flex items-center px-3 py-2 border rounded border-teal-400  hover:text-white hover:border-white">
+										<span className="sr-only">Open main menu</span>
+										{open ? (
+											<FaTimes className="block h-6 w-6" aria-hidden="true" />
+										) : (
+											<FcMenu className="block h-6 w-6" aria-hidden="true" />
+										)}
+									</Disclosure.Button>
+								</div>
+								<div className="hidden sm:block">
+									<div className="flex space-x-4 text-sm content-center">
+										{navigation.map((item) => (
+											<a
+												key={item.name}
+												href={item.href}
+												className={classNames(
+													item.current ? 'bg-gray-900 text-white' : 'text-black hover:bg-gray-700 hover:text-white',
+													'px-3 py-2 rounded-md text-sm font-medium'
+												)}
+												aria-current={item.current ? 'page' : undefined}
+											>
+												{item.name}
+											</a>
+										))}
+									</div>
+								</div>
+								<div className="block flex items-center">
+									<a href="https://www.linkedin.com/in/dennis-koech-ngeno/" className="mr-2"><FiGithub /></a>
+									<a href="https://github.com/Adoniswalker/"><AiOutlineLinkedin /></a>
+								</div>
+							</nav>
+
 						</div>
-						<div className="w-full lg:w-auto block">
-							<div className="text-sm lg:flex-grow content-center">
-								<a href="#" className="block mt-4 lg:inline-block lg:mt-0 hover:text-white hover:bg-black mr-4">Work</a>
-								<a href="#" className="block mt-4 lg:inline-block lg:mt-0 hover:text-white hover:bg-black mr-4">Resume</a>
-								<a href="#" className="block mt-4 lg:inline-block lg:mt-0 hover:text-white hover:bg-black">Contact</a>
+						<Disclosure.Panel className="sm:hidden">
+							<div className="px-2 pt-2 pb-3 space-y-1">
+								{navigation.map((item) => (
+									<a
+										key={item.name}
+										href={item.href}
+										className={classNames(
+											item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+											'block px-3 py-2 rounded-md text-base font-medium'
+										)}
+										aria-current={item.current ? 'page' : undefined}
+									>
+										{item.name}
+									</a>
+								))}
 							</div>
-						</div>
+						</Disclosure.Panel>
+					</>
+				)}
 
-						<div className="block flex items-center mt-4">
-							<a href="https://www.linkedin.com/in/dennis-koech-ngeno/" className="mr-2"><FiGithub /></a>
-							<a href="https://github.com/Adoniswalker/"><AiOutlineLinkedin /></a>
-						</div>
-					</nav>
-					<main>
-					</main>
-					<footer className={styles.footer}>
+			</Disclosure>
+			<main>
+			</main>
+			<footer className={styles.footer}>
 
-					</footer>
-				</div>
-			)}
-
-		</Disclosure>
+			</footer></>
 
 	)
 }
