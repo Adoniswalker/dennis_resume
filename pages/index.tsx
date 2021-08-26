@@ -20,19 +20,19 @@ function classNames(...classes: string[]) {
 export default function Home() {
 	return (
 		<>
-			<Disclosure as="nav" className="bg-gray-800">
+			<Head>
+				<title>Dennis Resume</title>
+				<meta name="description" content="Use to showcase my skills" />
+				<link rel="icon" href="/favicon.ico" />
+			</Head>
+			<Disclosure as="nav" className="bg-white">
 				{({ open }) => (
 					<>
 						<div className={styles.container}>
-							<Head>
-								<title>Dennis Resume</title>
-								<meta name="description" content="Use to showcase my skills" />
-								<link rel="icon" href="/favicon.ico" />
-							</Head>
-							<nav className="flex items-center justify-between flex-wrap bg-white p-3">
-								<div className="item-center font-black"><span>DN</span></div>
-								<div className="block lg:hidden">
-									<Disclosure.Button className="flex items-center px-3 py-2 border rounded border-teal-400  hover:text-white hover:border-white">
+							<div className="relative flex items-center justify-between flex-wrap bg-white p-3">
+								
+								<div className="absolute inset-y-0 left-0 flex items center block md:hidden">
+									<Disclosure.Button className="items-center px-3 py-2 border rounded border-teal-400  hover:text-white hover:border-white">
 										<span className="sr-only">Open main menu</span>
 										{open ? (
 											<FaTimes className="block h-6 w-6" aria-hidden="true" />
@@ -41,6 +41,8 @@ export default function Home() {
 										)}
 									</Disclosure.Button>
 								</div>
+								<div className="flex-1 flex  justify-center sm:items-stretch sm:justify-start font-black">
+									<div className="flex-shrink-0 flex items-center">DN</div></div>
 								<div className="hidden sm:block">
 									<div className="flex space-x-4 text-sm content-center">
 										{navigation.map((item) => (
@@ -48,7 +50,7 @@ export default function Home() {
 												key={item.name}
 												href={item.href}
 												className={classNames(
-													item.current ? 'bg-gray-900 text-white' : 'text-black hover:bg-gray-700 hover:text-white',
+													item.current ? 'bg-gray-700 text-white' : 'bg-gray-100 hover:bg-gray-200 hover:text-current',
 													'px-3 py-2 rounded-md text-sm font-medium'
 												)}
 												aria-current={item.current ? 'page' : undefined}
@@ -62,7 +64,7 @@ export default function Home() {
 									<a href="https://www.linkedin.com/in/dennis-koech-ngeno/" className="mr-2"><FiGithub /></a>
 									<a href="https://github.com/Adoniswalker/"><AiOutlineLinkedin /></a>
 								</div>
-							</nav>
+							</div>
 
 						</div>
 						<Disclosure.Panel className="sm:hidden">
@@ -72,7 +74,7 @@ export default function Home() {
 										key={item.name}
 										href={item.href}
 										className={classNames(
-											item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+											item.current ? 'bg-gray-700 text-white' : 'text-gray-800 hover:bg-gray-200 hover:text-current',
 											'block px-3 py-2 rounded-md text-base font-medium'
 										)}
 										aria-current={item.current ? 'page' : undefined}
