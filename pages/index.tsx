@@ -6,6 +6,7 @@ import {AiOutlineLinkedin} from 'react-icons/ai';
 import {Disclosure} from '@headlessui/react';
 import {FaTimes} from 'react-icons/fa';
 import {FcMenu} from 'react-icons/fc';
+import {Main} from "../components/home";
 
 const navigation = [
     {name: "Work", href: "#", current: true},
@@ -92,6 +93,7 @@ export default function Home() {
                 )}
             </Disclosure>
             <main>
+                <Main/>
             </main>
             <footer className={styles.footer}>
             </footer>
