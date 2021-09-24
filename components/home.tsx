@@ -10,7 +10,7 @@ export const Main = () =>{
                     <Image src={DennisImage} alt="dennis Image"/>
                 </div>
                 <div className="col-span-4">
-                    <h6>I am Dennis and I'm a <span>Mid level full stack Developer</span></h6>
+                    <h6>I am Dennis and I\'m a <span>Mid level full stack Developer</span></h6>
                     <p>2.8 years demonstrated experience in designing, architecting, and
                         developing enterprise-level internet solutions. I am a passionate,
                         knowledgeable, and self-driven Software Engineer with a bachelor’s

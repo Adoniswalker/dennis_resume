@@ -3,14 +3,50 @@ on:
     branches:
       - main
 jobs:
-  release:
-    name: Create Release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        run: |
-          npm ci
-          npm run export
+  # release:
+  #   name: Create Release
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v2
+  #       run: |
+  #         npm ci
+  #         npm run export
+  replicate-file:
+        runs-on: ubuntu-latest
+        name: Replicate File
+
+        steps:
+        - name: Checkout Project A
+          uses: actions/checkout@v2
+          with:
+            path: ./dennis_resume
+
+        - name: Checkout Project B
+          uses: actions/checkout@master
+          with: 
+            repository: Adoniswalker/slack-github
+            token: ${{ secrets.ACTIONS_TOKEN }}
+            path: ./slack_github
+
+        - name: Copy/Create file
+          run: |
+            FILE=./dennis_resume/tsconfig.json
+            if [ -f "$FILE" ]; then
+              echo "Copying $FILE"
+              cp -R ./dennis_resume/tsconfig.json ./slack_github
+            else 
+              echo "Creating $FILE"
+              touch ./slack_github/file
+            fi
+
+        - name: Push Project B
+          run: |
+            cd ./slack_github
+            git add .
+            git config user.name github-actions
+            git config user.email github-actions@github.com
+            git commit -am "File Replicated from Pr AA"
+            git push
